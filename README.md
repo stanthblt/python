@@ -719,3 +719,72 @@ seconde_moitie = nombres[3:]
 
 ---
 
+Créer une interface en ligne de commande (CLI) Python prenant un nombre infini d'arguments peut être réalisé en utilisant la bibliothèque standard `argparse`. Voici comment procéder pour gérer un nombre d'arguments arbitraire :
+
+### Étapes pour une CLI avec un nombre infini d'arguments :
+1. Utilisez l'argument `nargs` avec la valeur `'*'` ou `'+'` :
+   - `'*'` : zéro ou plus d'arguments.
+   - `'+'` : un ou plus d'arguments.
+
+2. Récupérez ces arguments dans une liste pour traitement ultérieur.
+
+---
+
+### Exemple de script CLI avec des arguments illimités
+
+Voici un exemple simple :
+
+```python
+import argparse
+
+def main():
+    parser = argparse.ArgumentParser(
+        description="Une CLI qui accepte un nombre illimité d'arguments."
+    )
+
+    # Ajout de l'argument infini
+    parser.add_argument(
+        'items', 
+        nargs='*',  # Accepte zéro ou plus d'arguments
+        help="Liste d'éléments à traiter"
+    )
+
+    args = parser.parse_args()
+
+    # Affiche les arguments reçus
+    print(f"Arguments reçus : {args.items}")
+
+    # Exemple de traitement des arguments
+    for i, item in enumerate(args.items, 1):
+        print(f"Argument {i} : {item}")
+
+if __name__ == "__main__":
+    main()
+```
+
+---
+
+### Comment utiliser ce script :
+1. Sauvegardez ce code dans un fichier `cli.py`.
+2. Exécutez-le en ligne de commande avec divers arguments, par exemple :
+
+```bash
+python cli.py arg1 arg2 arg3
+```
+
+#### Résultat attendu :
+```
+Arguments reçus : ['arg1', 'arg2', 'arg3']
+Argument 1 : arg1
+Argument 2 : arg2
+Argument 3 : arg3
+```
+
+---
+
+### Extensions possibles :
+- **Ajouter des options** (comme `-v` ou `--verbose`).
+- **Traiter des types spécifiques** : convertissez les arguments en entiers, flottants, etc.
+- **Validation** : ajoutez des contrôles spécifiques sur les arguments.
+
+Besoin de fonctionnalités supplémentaires ? 😊
